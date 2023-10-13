@@ -37,10 +37,10 @@ The `app` variable is the main entry point of the API. All operations that are a
 FastAPI uses the decorator syntax to specify the `operation` and `path`:
 
 -  `Operations` often refer to the methods of the HTTP protocol:
-    - `POST`
-    - `GET`
-    - `PUT`
-    - `DELETE`
+    - `POST`: Create (Used to create new resources)
+    - `GET`: Read (Retrieve a representation of a resource)
+    - `PUT`: Update (Update or Create a resource)
+    - `DELETE`: Delete (Used to delete a resource)
     In our use cases, we will only deal with `POST` and `GET` operations
 
 - The `path` refer to the last part of the URL after the endpoint. In our example, we created a root path that would look like this:
@@ -65,7 +65,11 @@ uvicorn main:app --reload
 By default, `uvicorn` will deploy the app on your localhost on the port 8000 [http://localhost:8000](http://localhost:8000). Clicking on this link will show you the home page of your API and display the message you coded.
 
 <details>
-<summary> If you want more information on the meaning of host and port, check:</summary>
+<summary> If you want more information on the meaning of host and port</summary>
+
+> **Host**: In networking, a host refers to a device that is connected to a network and can send or receive data. For example, a computer, smartphone, or server can be referred to as a host in a network.
+
+> **Port**: A port is a specific point where data can enter or leave a host. It is associated with a specific process or service in the host system. For example, web servers typically listen on port 80 for incoming HTTP requests.
 
 - [Host vs Localhost vs Port](https://stackoverflow.com/questions/1946193/whats-the-whole-point-of-localhost-hosts-and-ports-at-all)
 - [127.0.0.1 vs 0.0.0.0](https://stackoverflow.com/questions/20778771/what-is-the-difference-between-0-0-0-0-127-0-0-1-and-localhost)

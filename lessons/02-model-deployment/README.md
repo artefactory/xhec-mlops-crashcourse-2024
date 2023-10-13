@@ -5,7 +5,7 @@
 In this module, we will learn how to:
 
 - Deploy a model
-- Create a REST API to serve our model predictions
+- Create a [REST API](https://www.ibm.com/topics/rest-apis) to serve our model predictions
 - Dockerize the API
 
 Machine learning models are complex objects with numerous dependencies, such as specific feature transformations, a set of training data, hyperparameters, etc. If all consumers had to deal with this complexity to use these models, large organizations would struggle to extract value from them.
@@ -43,7 +43,7 @@ This is a great example of when we would want to create an API for an ML model. 
 
 ### Goal of this Lab
 
-We aim to have a REST API running that can predict *trip duration* for the NYC Taxi given the *pickup location ID*, *the drop off location ID*, and the *number of passengers*.
+We aim to have a [REST API](https://www.ibm.com/topics/rest-apis) running that can predict *trip duration* for the NYC Taxi given the *pickup location ID*, *the drop off location ID*, and the *number of passengers*.
 
 ### Part 1
 
@@ -102,7 +102,7 @@ uvicorn main:app --reload
 
 > The `reload` option here is used to help you debug your app. Every time the code changes, the app will be reloaded
 
-You can test your app by using the automatic documentation `FastAPI` generated for you.
+You can test your app by using the automatic documentation `FastAPI` generated for you, which can be accessed at [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ![Docs](./images/docs_example.png)
 
