@@ -201,14 +201,29 @@ Each linter has its own way of functioning and caveats, so choosing which one mi
 
 Good formatting is essetial to ensure that your code is readable and comprehensible. However, it is probably the area of coding in which it is the easiest to make a mistake. That is why we generally use tools that format the code automatically, ensuring that we are always PEP compliant. The most used tool for this end is [Black](https://github.com/psf/black). We also often use a tool to organize imports in a logical manner called [isort](https://pycqa.github.io/isort/). The configuration for both tools can be found in the `./pyproject.toml` file.
 
-## Automatic Docstrings (?)
+# Git
 
-TODO
+Working with a clean and legible git history is key to rendering your commit history usable. The whole point of using `git` is to keep track of the changes in code and collaborate better. Achieving that requires establishing rules that go beyond the simple practices we keep when working alone.
 
-# Git Flow
-
-TODO
+* If you want to learn more about the branching strategies most commonly used today: [what are the Best Git Branching Strategies](https://www.abtasty.com/blog/git-branching-strategies/) goes through the most commonly used branching strategies
+* More details on the Gitflow framework: [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+* If you want to master more advanced git functionalities: [Learning Git Branching](https://learngitbranching.js.org/)
 
 # Continuous Integration
 
-TODO
+# Continuous Integration (CI)
+
+Continuous Integration (CI) is a software development practice that involves frequently integrating code changes made by multiple developers into a shared repository. The main goal of CI is to streamline and automate the process of integrating code, running tests, and identifying and fixing bugs early in the development cycle. CI ensures that all changes are tested and incorporated into the main codebase in a consistent and reliable manner. It helps in maintaining code quality, reducing integration issues, and enhancing collaboration among team members. By automating the integration process, CI also enables faster feedback loops, making it easier to catch and resolve issues promptly, leading to improved software stability and quicker delivery of new features. Overall, CI is essential for achieving efficient, robust, and reliable software development.
+
+We included an example CI workflow in the [./.github/workflows/ci.yaml](./.github/workflows/ci.yaml) file. It does:
+
+* Copy the current repo into the GitHub Action
+* Set up python
+* Install requirements: ensures there are no conflicts in the requirements
+* Run pre-commit hooks: ensures developer installed pre-commit hooks and thus linted and formatted the code
+
+But a CI can also:
+* Run unit tests
+* Run integration tests
+* Avoid security failures
+* etc.
