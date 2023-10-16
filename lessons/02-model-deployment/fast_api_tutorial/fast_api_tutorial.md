@@ -128,10 +128,17 @@ You can modify the `Request body` to include your name:
 You can do the same operations directly from your terminal, by running:
 
 ```bash
+# The curl command is a tool to transfer data from or to a server, using one of the supported protocols (HTTP, HTTPS, FTP, etc.)
+# The -X option specifies a custom request method to use when communicating with the HTTP server. In this case, 'POST' is used.
 curl -X 'POST' \
+# The URL of the server to which the request is sent
   'http://localhost:8000/greet' \
+# Headers are used to provide information to both the client and server. They define the operating parameters of an HTTP transaction.
+# The -H option is used to include extra header information. 'accept: application/json' tells the server that the client expects JSON response.
   -H 'accept: application/json' \
+# 'Content-Type: application/json' tells the server that the client is sending JSON data in the body of the request.
   -H 'Content-Type: application/json' \
+# The -d option is used to send data in a POST request. It sends the following data to the server in JSON format.
   -d '{
   "name": "Student"
 }'
