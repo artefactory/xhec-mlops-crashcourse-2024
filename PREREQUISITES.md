@@ -22,26 +22,26 @@
 <details>
   <summary>📚 Table of Contents</summary>
 
-  - [Prerequisites and Setup](#prerequisites-and-setup)
   - [Docker Desktop](#docker-desktop)
     - [Download and Install Docker Desktop](#download-and-install-docker-desktop)
     - [✅ Check your Installation](#✅-check-your-installation)
-  - [Pull a Docker Image](#pull-a-docker-image)
+    - [Pull a Docker Image](#pull-a-docker-image)
     - [✅ Check that it works](#✅-check-that-it-works)
   - [Install Git](#install-git)
     - [Download & Install](#download-&-install)
     - [Configure Git](#configure-git)
     - [✅ Check your Installation](#✅-check-your-installation)
-  - [Install Conda + Python](#install-conda-+-python)
-    - [MiniConda](#miniconda)
-    - [✅ Check your Installation](#✅-check-your-installation)
-  - [Create Conda Environment](#create-conda-environment)
-    - [Create Conda Environment](#create-conda-environment)
-    - [Activate Conda Environment](#activate-conda-environment)
-    - [✅ Check your Installation](#✅-check-your-installation)
-  - [Make sure you can install requirements](#make-sure-you-can-install-requirements)
-    - [Create and install requirements](#create-and-install-requirements)
-    - [✅ Check your Installation](#✅-check-your-installation)
+  - [Conda + Python](#install-conda-+-python)
+    - [Conda or MiniConda](#conda-or-miniconda)
+      - [Install Miniconda](#install-miniconda)
+      - [✅ Check your Installation](#✅-check-your-installation)
+    - [Conda Environment](#conda-environment)
+      - [Create Conda Environment](#create-conda-environment)
+      - [Activate Conda Environment](#activate-conda-environment)
+      - [✅ Check your Installation](#✅-check-your-installation)
+    - [Install requirements](#install-requirements)
+      - [Create and install requirements](#create-and-install-requirements)
+      - [✅ Check your Installation](#✅-check-your-installation)
 
 </details>
 
@@ -71,7 +71,7 @@ wsl --update
 Once docker is installed, make sure that it is running correctly by running:
 
 ```bash
-docker run -p 80:80 docker/getting-started
+$ docker run -p 80:80 docker/getting-started
 ```
 
 If you check the Docker App, you should see a getting started container running. Once you've checked that this works correctly, remove the container via the UI.
@@ -81,14 +81,14 @@ If you check the Docker App, you should see a getting started container running.
     You can also perform these operations directly from the command line, by running <code>docker ps</code> to check the running containers and <code>docker rm -f [CONTAINER-ID]</code> to remove it.
 </details>
 
-## Pull a Docker Image
+### Pull a Docker Image
 
 During session 2 of this course, you will need to build a Docker image yourself. To speed up the building process, you can pre-build your image.
 
 Place your terminal at the root of the project and run:
 
 ```bash
-docker build -t "nyc-taxi:prerun" -f "lessons/02-model-deployment/app.Dockerfile" ./lessons/02-model-deployment
+$ docker build -t "nyc-taxi:prerun" -f "lessons/02-model-deployment/app.Dockerfile" ./lessons/02-model-deployment
 ```
 
 ### ✅ Check that it works
@@ -101,13 +101,13 @@ You can also check that it worked that by running:
 
 ```bash
 $ docker images
-> REPOSITORY   TAG        IMAGE ID       CREATED         SIZE
-> nyc-taxi     prerun     1878dadc8ab5   6 minutes ago   118MB
+REPOSITORY   TAG        IMAGE ID       CREATED         SIZE
+nyc-taxi     prerun     1878dadc8ab5   6 minutes ago   118MB
 ```
 
-## Install Git
+## Git
 
-### Git
+### Install Git
 
 Git is a distributed version control system that allows multiple people to work on a project at the same time without overwriting each other's changes.
 It's essential for any collaborative coding project.
@@ -119,7 +119,7 @@ Choose the instructions that match your operating system.
 After installation, you can verify that Git is correctly installed by opening a terminal and typing:
 
 ```bash
-git --version
+$ git --version
 ```
 
 This should return the version of Git that you installed.
@@ -130,8 +130,8 @@ After installing Git, you need to configure it with your name and email address.
 This is important because every Git commit uses this information, and it's immutably baked into the commits you start creating:
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "you email@foo.bar"
+$ git config --global user.name "Your Name"
+$ git config --global user.email "you email@foo.bar"
 ```
 
 You can find full configuration instruction on the [official Git website](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
@@ -151,51 +151,54 @@ Please carefully follow [instructions here](https://github.com/git-for-windows/g
 Open a terminal, you should be able to run the following commands:
 
 ```bash
->>> git --version
+$ git --version
 
 ```
 
 ```bash
->>> git config --global --list
+$ git config --global --list
 user.name=johndoe
 user.email=johndoe@foo.bar
 ```
 
 Try to clone pandas to check your connection to GitHub:
 ```bash
->>> git clone https://github.com/pandas-dev/pandas.git
+$ git clone https://github.com/pandas-dev/pandas.git
 Cloning into 'pandas'...
 ...
 ```
 
-## Install Conda + Python
+## Conda + Python
 
-### MiniConda
+### Conda or MiniConda
 
 [Conda](https://docs.conda.io/en/latest/) is a package manager that allows you to install and manage packages on your computer.
 [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is a minimal installer for conda.
 It includes only conda, Python, the packages they depend on, and a small number of other useful packages, including pip, zlib and a few others.
 
+
+#### Install Miniconda
+
 To install Miniconda, follow the instructions on the [official Miniconda website](https://docs.conda.io/en/latest/miniconda.html).
 
 
-### ✅ Check your Installation
+#### ✅ Check your Installation
 
 Open a terminal, you should be able to run the following commands:
 
 ```bash
->>> conda --version
+$ conda --version
 conda 22.9.0
 ```
 
 ```bash
->>> conda env list
+$ conda env list
 base                     /path/to/miniconda3
 ```
 
-## Create Conda Environment
+### Conda Environment
 
-### Create Conda Environment
+#### Create Conda Environment
 
 A conda environment is a directory that contains a specific collection of conda packages that you have installed.
 For example, you may have one environment with NumPy 1.7 and its dependencies, and another environment with NumPy 1.6 for legacy testing.
@@ -204,16 +207,16 @@ Or one environment with Python 3.8 and dependencies for project A and another wi
 To create a conda environment, run:
 
 ```bash
-conda create --name mlops-course python=3.10 -y
+$ conda create --name mlops-course python=3.10 -y
 ```
 
-### Activate Conda Environment
+#### Activate Conda Environment
 
 To use python version and dependencies from a conda environment, you need to activate it.
 
 To activate the environment, run:
 ```bash
-conda activate mlops-course
+$ conda activate mlops-course
 ```
 
 > [!Warning]
@@ -224,18 +227,18 @@ conda activate mlops-course
 > You might encounter other errors -> please google them (stackoverflow preferred) first.
 
 
-### ✅ Check your Installation
+#### ✅ Check your Installation
 
 Open a terminal, you should be able to run the following commands and have a similar (not necessarily identical) output:
 
 ```bash
->>> conda env list
+$ conda env list
 base                     /path/to/miniconda3
 mlops-course          *  /path/to/miniconda3/envs/mlops-course
 ```
 
 ```bash
->>> conda info
+$ conda info
 
      active environment : mlops-crash-test
     active env location : /Users/jules.bertrand/miniconda3/envs/mlops-crash-test
@@ -267,7 +270,7 @@ mlops-course          *  /path/to/miniconda3/envs/mlops-course
 ```
 
 ```bash
-conda list
+$ conda list
 # packages in environment at /Users/jules.bertrand/miniconda3/envs/mlops-course:
 #
 # Name                    Version                   Build  Channel
@@ -289,14 +292,14 @@ zlib                      1.2.13               h4dc903c_0
 ```
 
 ```bash
->>> python --version
+$ python --version
 Python 3.10.6
 ```
 
-## Install requirements
+### Install requirements
 
 
-### Create and install requirements
+#### Create and install requirements
 
 > [!Warning]
 > You will not have access to the course content before the course starts.
@@ -317,11 +320,11 @@ mlflow==1.20.2" >> requirements-temp.txt
 pip install -r requirements.txt
 ```
 
-### ✅ Check your Installation
+#### ✅ Check your Installation
 
 3. Check your requirements can be found in conda env
 ```bash
->>> conda list fastapi
+$ conda list fastapi
 # packages in environment at /Users/jules.bertrand/miniconda3/envs/mlops-crash-test:
 #
 # Name                    Version                   Build  Channel
@@ -330,7 +333,7 @@ fastapi                   0.103.2                  pypi_0    pypi
 
 4. Check you can access them from python
 ```bash
->>> python
+$ python
 Python 3.10.13 (main, Sep 11 2023, 08:39:02) [Clang 14.0.6 ] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import fastapi
@@ -338,4 +341,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 '0.88.0'
 ```
 
-Thank you :sparkles: !
+Thank you ✨ !
