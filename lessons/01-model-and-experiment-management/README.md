@@ -2,7 +2,7 @@
 
 ### Experiment tracking intro
 
-Experiment tracking is a crucial part of the machine learning lifecycle
+Experiment tracking is a crucial part of the machine learning lifecycle.
 It involves logging and monitoring the experiments in a systematic way.
 This allows for easy comparison of different runs, and helps in selecting the best model.
 
