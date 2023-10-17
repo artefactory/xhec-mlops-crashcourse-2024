@@ -1,26 +1,32 @@
-from lib.preprocessing import prepare_data
-from loguru import logger
-from sklearn.pipeline import Pipeline
+from typing import List
+
+import numpy as np
+import pandas as pd
+from lib.models import InputData
+from lib.preprocessing import CATEGORICAL_COLS, encode_categorical_cols
+from sklearn.base import BaseEstimator
+from sklearn.feature_extraction import DictVectorizer
 
 
-def run_inference(payload: dict, pipeline: Pipeline) -> float:
-    """Runs an inference on a single data point using a pre-fitted pipeline.
-
-    Takes a pre-fitted pipeline (dictvectorizer + linear regression model) outputs the computed
-    trip duration in minutes.
+def run_inference(
+    input_data: List[InputData], dv: DictVectorizer, model: BaseEstimator
+) -> np.ndarray:
+    """Run inference on a list of input data.
 
     Args:
         payload (dict): the data point to run inference on.
-        pipeline (Pipeline): the pre-fitted pipeline containing a dictvectorizer and a linear
-            model.
+        dv (DictVectorizer): the fitted DictVectorizer object.
+        model (BaseEstimator): the fitted model object.
 
     Returns:
-        float: the predicted trip duration in minutes.
+        np.ndarray: the predicted trip durations in minutes.
 
     Example payload:
         {'PULocationID': 264, 'DOLocationID': 264, 'passenger_count': 1}
     """
-    logger.info("Running inference on payload...")
-    prep_features = prepare_data(payload)
-    trip_duration_prediction = pipeline.predict(prep_features)[0]
-    return trip_duration_prediction
+    df = pd.DataFrame([x.dict() for x in input_data])
+    df = encode_categorical_cols(df)
+    dicts = df[CATEGORICAL_COLS].to_dict(orient="records")
+    X = dv.transform(dicts)
+    y = model.predict(X)
+    return y

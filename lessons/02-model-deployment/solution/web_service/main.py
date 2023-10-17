@@ -3,12 +3,13 @@ from app_config import (
     APP_TITLE,
     APP_VERSION,
     MODEL_VERSION,
-    PATH_TO_PIPELINE,
+    PATH_TO_MODEL,
+    PATH_TO_PREPROCESSOR,
 )
 from fastapi import FastAPI
 from lib.modelling import run_inference
 from lib.models import InputData, PredictionOut
-from lib.utils import load_pipeline
+from lib.utils import load_model, load_preprocessor
 
 app = FastAPI(title=APP_TITLE, description=APP_DESCRIPTION, version=APP_VERSION)
 
@@ -20,6 +21,7 @@ def home():
 
 @app.post("/predict", response_model=PredictionOut, status_code=201)
 def predict(payload: InputData):
-    pipeline = load_pipeline(PATH_TO_PIPELINE)
-    trip_duration_prediction = run_inference(payload.model_dump(), pipeline)
-    return {"trip_duration_prediction": trip_duration_prediction}
+    dv = load_preprocessor(PATH_TO_PREPROCESSOR)
+    model = load_model(PATH_TO_MODEL)
+    y = run_inference([payload], dv, model)
+    return {"trip_duration_prediction": y[0]}
