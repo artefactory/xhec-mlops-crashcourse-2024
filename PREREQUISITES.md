@@ -117,6 +117,8 @@ You will need to install [`git bash`](https://gitforwindows.org/) to have access
 
 Please carefully follow [instructions here](https://github.com/git-for-windows/git/releases/tag/v2.42.0.windows.2).
 
+> Note: you can also use WSL terminal, but it's a bit more complicated to use.
+
 ### ✅ Check your Installation
 
 Open a terminal, you should be able to run the following commands:
