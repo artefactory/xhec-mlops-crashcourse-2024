@@ -1,4 +1,14 @@
-## Introduction and Use Case Reminder
+# Introduction
+
+Welcome to the MLOps Introduction Course! Over the course of the next 4 sessions, we will present you some of the fundamental aspects of engineering applied to Machine Learning.
+
+## Introduction to Coding Best Practices
+
+The first step will be to cover the Coding Best Practices Guide available [here](./best-practices/best_practices_guide.md).
+
+Once this step is done, you can start working on the use case that we will explore throughout this entire course.
+
+## Introduction to the Use Case
 
 The project focuses on predicting the duration of *New York City Taxi trips*. \
 The objective is to use the available data to train a simple machine learning model
@@ -28,22 +38,9 @@ interpretable performances. Here we use data volumes that fit locally and allow 
 > Please create a "00-data" folder in the course root directory and place the downloaded files inside. \
 > If the names are different, please rename your files to "yellow_tripdata_2021-01.parquet", "yellow_tripdata_2021-02.parquet", and "yellow_tripdata_2021-03.parquet" respectively.
 
-## Notebook Execution
+### Introduction Notebook
 
-A notebook implementing the machine learning steps to predict Taxi trip duration can be found in the
-course's GitHub repository in the [introduction course](https://github.com/artefactory/supinfo_mlops_course/blob/master/lessons/01-intro).
-
-Since the main focus of the course is not Machine Learning itself, we recommend running the notebook in your local Jupyter container.
-
-1. First, let's create our Jupyter Lab image and network by running
-```bash
-make prepare-mlops-crashcourse
-```
-
-2. Then, let's create our local Jupyter Lab container by running
-```bash
-make launch-mlops-crashcourse
-```
-You will need to pass the token 'MLOPS' to your Jupyter Lab UI
-
-3. Finally, navigate to `lessons/01-intro/practice-intro-supinfo.ipynb` and try running and understanding the model implementation
+A notebook implementing the machine learning steps to predict Taxi trip duration can be found [here](./practice-intro-subject.ipynb). Your first task is run this notebook and pay attention to:
+- The features that are used
+- The target variable and how it is computed
+- The models that are used to fit the data
