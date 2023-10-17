@@ -21,7 +21,7 @@ You can learn more about the rationale of using APIs for Machine Learning [here]
 
 In this module, we will create a `web service` that can predict the *trip duration* for the NYC Taxi given the *pickup location ID*, *the drop off location ID*, and the *number of passengers*.
 
-## 4.2 - Model Deployment
+## Model Deployment
 
 We will use the REST architecture we covered in the theoretical part of the course to build our web service. There are several options of frameworks that allow us to package our model into a web service:
 
@@ -51,31 +51,24 @@ In this first part, you will create a simple application that runs locally on yo
 
 #### 1 - Copy the work from previous sessions
 
-* 2.1 Copy the functions you developed in the last session into the `web_service/lib` folder.
+* 1.1 Copy the functions you developed in the last session into the `web_service/lib` folder.
 
 > *In the previous lectures, you have packaged your code into two functions: `train_model` and `predict`. To fulfill the Lab's objective, do you need both these functions?*
 
-* 2.2 Copy the serialized version of your model into `web_service/local_models`
+* 1.2 Copy the serialized version of your model into `web_service/local_models`
 
 #### 2 - We will populate the `web_service/lib/models.py` file with `pydantic` models that will serve as type hints for your app.
 
 Starting by defining your inputs and outputs is often a good idea in app development because it will guide the decisions you make in designing your software.
 
-* 2.1 - Create a `pydantic` model that specifies the input the user should provide.
+Create a `pydantic` model that specifies the input the user should provide.
 
-    >*Do you expect a single value or a list of values?*
+> *Do you expect a single value or a list of values?*
 
-    >*What are the names of the input variables?*
+> *What are the names of the input variables?*
 
-    >*What are the types of the input variables? Are there any important constraints?*
+> *What are the types of the input variables? Are there any important constraints?*
 
-* 2.1 - Create a `pydantic` model that specifies the output of your API.
-
-    >*Do you expect a single value or a list of values?*
-
-    >*What are the names of the output variables?*
-
-    >*What are the types of the output variables? Are there any important constraints?*
 
 #### 3 - It is time to populate the `web_service/main.py` file with your app
 
