@@ -24,10 +24,10 @@ def call_people() -> None:
     phone_number = pd.read_csv(DATA_PATH)
     for _, person in phone_number.iterrows():
         print(
-            f"Calling {person['name']} at {person['phone']}")
+            f"Calling {person['name']} at {person['telephone']}")
 
 
 if __name__ == "__main__":
-    hello_world()
+    Hello_world()
     print(sum_two_numbers(5, 7))
     call_people()
