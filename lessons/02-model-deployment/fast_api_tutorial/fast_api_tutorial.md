@@ -51,14 +51,14 @@ You can copy the code into a file called `main.py` in this `fast_api_tutorial` f
 To launch the app, you should run in your terminal:
 
 ```bash
-cd cd lessons/02-model-deployment/fast_api_tutorial
+cd lessons/02-model-deployment/fast_api_tutorial
 ```
 
 ```bash
 uvicorn main:app --reload
 ```
 
-`Uvicorn` is a tool that helps your Python web applications run quickly and handle many tasks at the same time. We are using it here to run our FastAPI application. The command we used tells it to look for the `app` object inside our `main.py` file. The `--reload` option relaunches the application every time the code changes (it should only be used in development).
+[`Uvicorn`](https://www.uvicorn.org/) is a tool that helps your Python web applications run quickly and handle many tasks at the same time. We are using it here to run our FastAPI application. The command we used tells it to look for the `app` object inside our `main.py` file. The `--reload` option relaunches the application every time the code changes (it should only be used in development).
 
 ## Check your new app
 
@@ -143,6 +143,12 @@ curl -X 'POST' \
   "name": "Student"
 }'
 ```
+
+<details>
+    <summary>Curl in Windows</summary>
+
+If you are using a Windows machine, the `curl` command will probably not be intalled. You can follow the instructions of this [tutorial](https://developer.zendesk.com/documentation/api-basics/getting-started/installing-and-using-curl/#using-curl-in-windows) to adapt the command.
+</details>
 
 You can also check that `pydantic` is performing the data validation well by sending a bad request:
 

@@ -25,9 +25,9 @@ In this module, we will create a `web service` that can predict the *trip durati
 
 We will use the REST architecture we covered in the theoretical part of the course to build our web service. There are several options of frameworks that allow us to package our model into a web service:
 
-- FastAPI
-- Flask
-- Django
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+- [Django](https://docs.djangoproject.com/en/4.2/)
 
 For this module, we will use FastAPI, a modern, fast (high-performance), web framework for building APIs with Python based on standard Python type hints.
 
@@ -61,7 +61,7 @@ In this first part, you will create a simple application that runs locally on yo
 
 Starting by defining your inputs and outputs is often a good idea in app development because it will guide the decisions you make in designing your software.
 
-Create a `pydantic` model that specifies the input the user should provide.
+Create a `pydantic` model that specifies the input the user should provide. *See an example [here](https://github.com/artefactory/xhec-mlops-crashcourse-2023/blob/feature-deployment/lessons/02-model-deployment/fast_api_tutorial/fast_api_tutorial.md#create-a-post-operation)*
 
 > *Do you expect a single value or a list of values?*
 
@@ -113,20 +113,11 @@ Place your requirements file in `./requirements_app.txt`
 
 > *Try to make this file as minimal as possible. Only list the packages that are absolutely necessary*
 
-#### 6 - Build a Dockerfile that launches your app in the localhost
+#### 6 - Complete the `Dockerfile.app` file
 
 > *Which files do you need? Are you sure that they will be available for anyone who tries to launch the app?*
-
-Reminder of useful Docker commands:
-
-* `docker build -t <image-name:tag> -f <dockerfile-name> .` - Build a Docker image using the Dockerfile in the current directory. [Documentation](https://docs.docker.com/engine/reference/commandline/build/#tag)
-* `docker run -p <host-port>:<container-port> <image-name:tag>` - Run a Docker container from an image, mapping the container's port to the host's port. [Documentation](https://docs.docker.com/engine/reference/commandline/run/)
-* `docker ps` - List all running Docker containers.
-* `docker ps -a` - List all Docker containers, both running and stopped.
-* `docker images` - List all Docker images.
-* `docker rm <container-id>` - Remove a Docker container.
-* `docker rmi <image-id>` - Remove a Docker image.
-* `docker stop <container-id>` - Stop a running Docker container.
+> *What are the requirements needed to run the application?*
+> *How can you make your computer access the server launched in the Docker container? Do you need to expose a port?*
 
 Useful Dockerfile instructions:
 
@@ -142,6 +133,17 @@ Useful Dockerfile instructions:
 #### 7 - Test your app
 
 Using the appropriate Docker commands, you should be able to get the same result as in part 2.
+
+Reminder of useful Docker commands:
+
+* `docker build -t <image-name:tag> -f <dockerfile-name> .` - Build a Docker image using the Dockerfile in the current directory. [Documentation](https://docs.docker.com/engine/reference/commandline/build/#tag)
+* `docker run -p <host-port>:<container-port> <image-name:tag>` - Run a Docker container from an image, mapping the container's port to the host's port. [Documentation](https://docs.docker.com/engine/reference/commandline/run/)
+* `docker ps` - List all running Docker containers.
+* `docker ps -a` - List all Docker containers, both running and stopped.
+* `docker images` - List all Docker images.
+* `docker rm <container-id>` - Remove a Docker container.
+* `docker rmi <image-id>` - Remove a Docker image.
+* `docker stop <container-id>` - Stop a running Docker container.
 
 ### *[Optional] Part 3*
 
