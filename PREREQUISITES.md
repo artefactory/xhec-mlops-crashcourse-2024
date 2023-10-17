@@ -19,6 +19,33 @@
 > Each section has a **Check your Installation** section.
 > Please make sure you can run the commands in that section before moving on to the next section.
 
+<details>
+  <summary>📚 Table of Contents</summary>
+
+  - [Prerequisites and Setup](#prerequisites-and-setup)
+  - [Docker Desktop](#docker-desktop)
+    - [Download and Install Docker Desktop](#download-and-install-docker-desktop)
+    - [✅ Check your Installation](#✅-check-your-installation)
+  - [Pull a Docker Image](#pull-a-docker-image)
+    - [✅ Check that it works](#✅-check-that-it-works)
+  - [Install Git](#install-git)
+    - [Download & Install](#download-&-install)
+    - [Configure Git](#configure-git)
+    - [✅ Check your Installation](#✅-check-your-installation)
+  - [Install Conda + Python](#install-conda-+-python)
+    - [MiniConda](#miniconda)
+    - [✅ Check your Installation](#✅-check-your-installation)
+  - [Create Conda Environment](#create-conda-environment)
+    - [Create Conda Environment](#create-conda-environment)
+    - [Activate Conda Environment](#activate-conda-environment)
+    - [✅ Check your Installation](#✅-check-your-installation)
+  - [Make sure you can install requirements](#make-sure-you-can-install-requirements)
+    - [Create and install requirements](#create-and-install-requirements)
+    - [✅ Check your Installation](#✅-check-your-installation)
+
+</details>
+
+
 ## Docker Desktop
 
 Docker Desktop is a tool for MacOS and Windows machines for the building and sharing of containerized applications and microservices. It includes Docker Engine, Docker CLI client, Docker Compose, Notary, Kubernetes, and Credential Helper. It also features an intuitive user interface that makes managing your Docker images and containers locally much easier.
@@ -266,7 +293,10 @@ zlib                      1.2.13               h4dc903c_0
 Python 3.10.6
 ```
 
-## Make sure you can install requirements
+## Install requirements
+
+
+### Create and install requirements
 
 > [!Warning]
 > You will not have access to the course content before the course starts.
