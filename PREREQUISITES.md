@@ -11,19 +11,72 @@
 >
 > You know your school WiFi better than we do, don't gamble on it.
 
-
+> [!Important]
+> We will be using Docker for this course, which can use up a lot of your disk.
+> Make sure to have at least 10Gb available in your disk before starting this course. Otherwise you risk running into some obscure errors.
 
 > [!Note]
 > Each section has a **Check your Installation** section.
 > Please make sure you can run the commands in that section before moving on to the next section.
 
-## Install Docker Desktop
+## Docker Desktop
 
-### Docker Desktop
+Docker Desktop is a tool for MacOS and Windows machines for the building and sharing of containerized applications and microservices. It includes Docker Engine, Docker CLI client, Docker Compose, Notary, Kubernetes, and Credential Helper. It also features an intuitive user interface that makes managing your Docker images and containers locally much easier.
 
-### Pull python image
+### Download and Install Docker Desktop
+
+> 📣 **This step is the most time consuming one. You will not be able to perform it at HEC.** 📣
+
+If you do not have `Docker Desktop` installed, you will need to install it. You can follow the official instructions:
+
+* [Install Docker - Mac OS](https://docs.docker.com/desktop/install/mac-install/)
+* [Install Docker - Linux](https://docs.docker.com/desktop/install/linux-install/)
+* [Install Docker - Windows](https://docs.docker.com/desktop/install/windows-install/)
+
+For those of you working on Windows, you might need to update Windows Subsystem for Linux. To do so, simply open PowerShell and run:
+
+```bash
+wsl --update
+```
 
 ### ✅ Check your Installation
+
+Once docker is installed, make sure that it is running correctly by running:
+
+```bash
+docker run -p 80:80 docker/getting-started
+```
+
+If you check the Docker App, you should see a getting started container running. Once you've checked that this works correctly, remove the container via the UI.
+
+<details>
+    <summary><b>Optional</b></summary>
+    You can also perform these operations directly from the command line, by running <code>docker ps</code> to check the running containers and <code>docker rm -f [CONTAINER-ID]</code> to remove it.
+</details>
+
+## Pull a Docker Image
+
+During session 2 of this course, you will need to build a Docker image yourself. To speed up the building process, you can pre-build your image.
+
+Place your terminal at the root of the project and run:
+
+```bash
+docker build -t "nyc-taxi:prerun" -f "lessons/02-model-deployment/app.Dockerfile" ./lessons/02-model-deployment
+```
+
+### ✅ Check that it works
+
+You should be able to see your image in the Docker Desktop UI:
+
+![Docker Image](./images/example_image.png)
+
+You can also check that it worked that by running:
+
+```bash
+$ docker images
+> REPOSITORY   TAG        IMAGE ID       CREATED         SIZE
+> nyc-taxi     prerun     1878dadc8ab5   6 minutes ago   118MB
+```
 
 ## Install Git
 
