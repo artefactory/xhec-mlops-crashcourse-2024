@@ -55,7 +55,7 @@ In this first part, you will create a simple application that runs locally on yo
 
 > *In the previous lectures, you have packaged your code into two functions: `train_model` and `predict`. To fulfill the Lab's objective, do you need both these functions?*
 
-* 1.2 Copy the serialized version of your model into `web_service/local_models`
+* 1.2 Copy the serialized version of your model and your preprocessor (DictVectorizer) into `web_service/local_models`
 
 #### 2 - We will populate the `web_service/lib/models.py` file with `pydantic` models that will serve as type hints for your app.
 
