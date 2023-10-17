@@ -3,7 +3,7 @@
 > [!Important]
 > The course is dense.
 >
-> You won't have time to install and configure everything during on D-day.
+> You won't have time to install and configure everything on D-day.
 >
 > You won't be able to follow the course if you don't have everything installed and working.
 >
