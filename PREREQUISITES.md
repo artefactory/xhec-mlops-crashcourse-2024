@@ -19,6 +19,15 @@
 > Each section has a **Check your Installation** section.
 > Please make sure you can run the commands in that section before moving on to the next section.
 
+
+## How to debug
+
+1. Check and try to understand your error message
+2. Google it / StackOverflow it
+3. If you can't find a solution, ask your friends
+4. If your friends can't help you, ask us on Slack
+
+
 <details>
   <summary>📚 Table of Contents</summary>
 
@@ -52,6 +61,7 @@ Docker Desktop is a tool for MacOS and Windows machines for the building and sha
 
 ### Download and Install Docker Desktop
 
+> [!Warning]
 > 📣 **This step is the most time consuming one. You will not be able to perform it at HEC.** 📣
 
 If you do not have `Docker Desktop` installed, you will need to install it. You can follow the official instructions:
@@ -161,11 +171,10 @@ user.name=johndoe
 user.email=johndoe@foo.bar
 ```
 
-Try to clone pandas to check your connection to GitHub:
+Try to reach pandas GitHub repo to check your connection to GitHub:
 ```bash
-$ git clone https://github.com/pandas-dev/pandas.git
-Cloning into 'pandas'...
-...
+$ git ls-remote --get-url https://github.com/pandas-dev/pandas.git
+https://github.com/pandas-dev/pandas.git
 ```
 
 ## Conda + Python
