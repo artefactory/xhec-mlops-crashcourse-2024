@@ -1,4 +1,18 @@
-# Code structure
+# Best Practices Guide
+
+## Intro
+
+As we saw in the introduction to MLOps, enabling easy collaboration in a project is a hard task. Among other things we need to:
+
+- Guarantee the reproducibility of the code in different environments
+- Make it easy for all developers to read and understand code
+- Detect mistakes and bugs that are hidden in the code
+
+In this guide, we will cover some of the important steps to fix these problems.
+
+## Code structure
+
+The use of python scripts is almost always prefered to notebooks when we want to ensure the reproducibility and clarity of the code. Notebooks are a great tool to perform exploration and quickly test some aspects of the code. However, scripts allow for more modularity in development and allow a more ligthweight environment to be run.
 
 Going from notebooks to scripts is, by itself, a simple task. However, it can also be the very first time that we are confronted with a project structure. The goal here is to present one of the many possible ways of structuring a project. Here is a quick overview of all the components that we usually employ during a project:
 
@@ -25,13 +39,17 @@ Going from notebooks to scripts is, by itself, a simple task. However, it can al
 └── README.md                     <- The top-level README for developers using this project
 ```
 
-Every project has its own needs and might not require all of these files or might ask for other ones. Indeed, this very repository does not follow this exact structure to accomodate for the specificities of this lecture. However, increasing the standardization of the placement of these files is crucial to ensure that any developer can quickly read and understand your work in the future.
+Every project has its own needs and might not require all of these files or might ask for new ones. Indeed, this very repository does not follow this exact structure to accomodate for the specificities of this lecture. However, increasing the standardization of the placement of these files is crucial to ensure that any developer can quickly read and understand your work in the future.
 
-# Python virtual environments
+### Demo
 
-Once your project is set up, it is time to ensure that you have the proper environment to run your code.
+- Check out the structure of this folder and navigate the files to see what is there and what is missing
 
-## Motivations
+## Python virtual environments
+
+The first step to run python code is always to create a separated environment to run it.
+
+### Motivations
 
 Here are some common development issues:
 
@@ -61,11 +79,11 @@ dependencies:
   - pandas=1.1.0
 ```
 
-## Setting up a virtual environment
+### Setting up a virtual environment
 
 We will present 2 options: using `virtualenv` or `conda`
 
-### Virtualenv
+#### Virtualenv
 
 ```
 # Install virtualenv package
@@ -79,7 +97,7 @@ $ source venv/Scripts/activate  # Windows
 $ source venv/bin/activate  # Unix
 ```
 
-### Conda
+#### Conda
 
 If you have a Miniconda installed:
 
@@ -101,11 +119,11 @@ $ conda activate envname
 
 Once activated, the command line starts with (`envname`) to let you know which environment you're in. The environment must always be activated while working in the project.
 
-## Handle dependencies
+### Handle dependencies
 
 In your base environment, there should not be any Python packages. This isolates the dependencies of any project, avoiding future compatibility problems. Therefore, you must always install dependencies from within your virtual environment.
 
-### Virtualenv
+#### Virtualenv
 
 ```
 $ source venv/bin/activate  # Activate env
@@ -132,7 +150,7 @@ You should not forget to add this new dependence to `requirements.txt`. Our reco
 
 This will automatically parse all your nested dependencies into `requirements.txt` thus ensuring full reproducibility. The only caveats are that it requires an additional package, `pip-tools` and that it takes some time to compile long and complex requirements.
 
-### Conda
+#### Conda
 
 If the name is correctly specified in the `environment.yml` file, then there is no need to run the following command from within the virtual environment:
 
@@ -156,13 +174,13 @@ You should not forget to add this new dependence to `environment.yml`. To get th
 
 ```
 dependencies: # Versions should be taken care of
-  - python=3.7
-  - pip=21.0.1
+  - python=3.10
+  - pip=23.2.1
   - pip:
     - -r requirements.txt
 ```
 
-## Conda VS Pip
+### Conda VS Pip
 
 *TL;DR*: use conda.
 
@@ -171,11 +189,15 @@ These two resources are worth reading:
 - Stack Overflow: [What is the difference between Pip and Conda](https://stackoverflow.com/questions/20994716/what-is-the-difference-between-pip-and-conda)
 - Anaconda blog: [Understanding the difference between Conda and Pip](https://www.anaconda.com/blog/understanding-conda-and-pip)
 
-# Locally check your code
+### Demo
+
+- Let's create a new environment to run our hello world project using the `install_env.sh` script.
+
+## Locally check your code
 
 You now have a functioning local environment where you can develop python code. Still, it is common for us to make silly mistakes while coding. Over time, these mistakes can compound and add up to a large unexpected failure or just a general decline in code quality. We can employ simple and effective tools to help us overcome these small mistakes when developing.
 
-## Linting
+### Linting
 
 *Linters* perform a *static* evaluation of the code to look for bugs and errors. They are useful as they help in identifying potential issues in the code before it is run. As they perform static evaluation, they cannot catch any RunTime errors. However, a linter can check for syntax errors, type mismatches, and code smells. The most used linters in Python include:
 
@@ -186,11 +208,31 @@ You now have a functioning local environment where you can develop python code. 
 
 Each linter has its own way of functioning and caveats, so choosing which one might be a matter of just sticking to what your pairs already use or looking for a specific feature. In this repo, we use `flake8` whose configuration can be found in `./.flake8`
 
-## Automatic Formatting
+### Demo
+
+- Lint the `best-practices` folder using flake8
+
+### Automatic Formatting
 
 Good formatting is essetial to ensure that your code is readable and comprehensible. However, it is probably the area of coding in which it is the easiest to make a mistake. That is why we generally use tools that format the code automatically, ensuring that we are always PEP compliant. The most used tool for this end is [Black](https://github.com/psf/black). We also often use a tool to organize imports in a logical manner called [isort](https://pycqa.github.io/isort/). The configuration for both tools can be found in the `./pyproject.toml` file.
 
-# Git
+### Pre-commit Hooks
+
+Git provides a useful tool to help putting these technique into practice. Pre-commit hooks allow you to perform these code checks every time you make a commit. The `pre-commit` packages helps to use this tool, by creating a customizable config file for the pre-commits. You can find it [here](./.pre-commit-config.yaml).
+
+Before using the pre-commits, you must install them, by running in your terminal:
+
+```bash
+pre-commit install -t pre-commit
+```
+
+### Demo
+
+- Run `isort` to format the imports
+- Run `black` to format the code
+- Create a commit with the changes and see that all check pass
+
+## Git
 
 Working with a clean and legible git history is key to rendering your commit history usable. The whole point of using `git` is to keep track of the changes in code and collaborate better. Achieving that requires establishing rules that go beyond the simple practices we keep when working alone.
 
@@ -198,9 +240,9 @@ Working with a clean and legible git history is key to rendering your commit his
 * More details on the Gitflow framework: [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
 * If you want to master more advanced git functionalities: [Learning Git Branching](https://learngitbranching.js.org/)
 
-# Continuous Integration
+## Continuous Integration
 
-# Continuous Integration (CI)
+## Continuous Integration (CI)
 
 Continuous Integration (CI) is a software development practice that involves frequently integrating code changes made by multiple developers into a shared repository. The main goal of CI is to streamline and automate the process of integrating code, running tests, and identifying and fixing bugs early in the development cycle. CI ensures that all changes are tested and incorporated into the main codebase in a consistent and reliable manner. It helps in maintaining code quality, reducing integration issues, and enhancing collaboration among team members. By automating the integration process, CI also enables faster feedback loops, making it easier to catch and resolve issues promptly, leading to improved software stability and quicker delivery of new features. Overall, CI is essential for achieving efficient, robust, and reliable software development.
 
