@@ -3,15 +3,9 @@
 Going from notebooks to scripts is, by itself, a simple task. However, it can also be the very first time that we are confronted with a project structure. The goal here is to present one of the many possible ways of structuring a project. Here is a quick overview of all the components that we usually employ during a project:
 
 ```
-├── .github                      <- Where we set up interactions with GitHub such as actions and templates
-├── docs                         <- Project documentation, often generated automatically by tools like `Sphinx`
-├── config                       <- Config variables
-│   ├── env                      <- Environment specific
-│   │   ├── dev.yml
-│   │   ├── debug.yml
-│   │   └── prod.yml
-│   └── constants.py              <- Constants used in python scripts that are environment agnostic
-├── bin                           <- Executable scripts
+├── .github                       <- Where we set up interactions with GitHub such as actions and templates
+├── docs                          <- Project documentation, often generated automatically by tools like `Sphinx`
+├── config                        <- Config variables stored in yaml, toml or py files
 ├── lib                           <- Main Package. This is where the code lives. Sometimes it is also called `src`
 │   ├── main.py                   <- Entrypoint
 │   ├── lib1                      <- Library functions 1
@@ -21,18 +15,13 @@ Going from notebooks to scripts is, by itself, a simple task. However, it can al
 │   └── utils                     <- Where utils scripts and functions live (shared across libs)
 ├── notebooks                     <- Where the jupyter notebooks are stored
 ├── tests                         <- Where the tests live
-│   ├── unit_tests
-│   └── integration_tests
 ├── Dockerfile                    <- Project containerization
 ├── requirements.in               <- Python packages used by project
 ├── requirements.txt              <- Automatically generated requirements (adding all nested dependencies from requirements.in)
-├── environment.yml               <- conda environment file (specifying virtual env name, python version and python packages)
-├── .flake8                       <- linter config
-├── .gitignore                    <- files not to be tracked
-├── pytest.ini                    <- pytest config
-├── pyproject.toml                <- package configuration
-├── CONTRIBUTING.md               <- Contribution guidelines
-├── Makefile                      <- commands to ease up development cycle
+├── environment.yml               <- Conda environment file (specifying virtual env name, python version and python packages)
+├── .gitignore                    <- Files not to be tracked
+├── pyproject.toml                <- Package configuration also used to configure tools such as linters, etc
+├── Makefile                      <- Commands to ease up development cycle
 └── README.md                     <- The top-level README for developers using this project
 ```
 
