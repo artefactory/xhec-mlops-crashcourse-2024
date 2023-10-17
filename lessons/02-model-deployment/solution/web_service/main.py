@@ -7,6 +7,7 @@ from app_config import (
     PATH_TO_PREPROCESSOR,
 )
 from fastapi import FastAPI
+
 from lib.modelling import run_inference
 from lib.models import InputData, PredictionOut
 from lib.utils import load_model, load_preprocessor
