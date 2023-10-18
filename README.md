@@ -58,7 +58,7 @@ Course end: October 23th
 * Practice
 
 
-## [Module 5: Life Cycle Management](lessons/04-life-cycle-management)
+## [Module 5: Life Cycle Management]
 
 * Model monitoring
 * Model retraining
@@ -74,6 +74,6 @@ Course end: October 23th
 ## Instructors
 
 - Delattre Bruce
-- Brito Leao Henrique
+- Brito Henrique
 - Bertrand Jules
 - Serra Luca
