@@ -33,24 +33,25 @@
 
   - [Docker Desktop](#docker-desktop)
     - [Download and Install Docker Desktop](#download-and-install-docker-desktop)
-    - [✅ Check your Installation](#✅-check-your-installation)
+    - [✅ Check your Installation](#✅-check-your-installation---docker-desktop)
     - [Pull a Docker Image](#pull-a-docker-image)
-    - [✅ Check that it works](#✅-check-that-it-works)
-  - [Install Git](#install-git)
-    - [Download & Install](#download-&-install)
-    - [Configure Git](#configure-git)
-    - [✅ Check your Installation](#✅-check-your-installation)
+    - [✅ Check your Installation](#✅-check-your-installation---docker-pull)
+  - [Git](#git)
+    - [Install Git](#install-git)
+      - [Download & Install](#download-&-install)
+      - [Configure Git](#configure-git)
+    - [✅ Check your Installation](#✅-check-your-installation---git)
   - [Conda + Python](#install-conda-+-python)
     - [Conda or MiniConda](#conda-or-miniconda)
       - [Install Miniconda](#install-miniconda)
-      - [✅ Check your Installation](#✅-check-your-installation)
+      - [✅ Check your Installation](#✅-check-your-installation---conda)
     - [Conda Environment](#conda-environment)
       - [Create Conda Environment](#create-conda-environment)
       - [Activate Conda Environment](#activate-conda-environment)
-      - [✅ Check your Installation](#✅-check-your-installation)
+      - [✅ Check your Installation](#✅-check-your-installation---conda-environment)
     - [Install requirements](#install-requirements)
       - [Create and install requirements](#create-and-install-requirements)
-      - [✅ Check your Installation](#✅-check-your-installation)
+      - [✅ Check your Installation](#✅-check-your-installation---requirements)
 
 </details>
 
@@ -76,7 +77,7 @@ For those of you working on Windows, you might need to update Windows Subsystem 
 wsl --update
 ```
 
-### ✅ Check your Installation
+### ✅ Check your Installation - Docker Desktop
 
 Once docker is installed, make sure that it is running correctly by running:
 
@@ -101,7 +102,7 @@ Place your terminal at the root of the project and run:
 $ docker build -t "nyc-taxi:prerun" -f "lessons/02-model-deployment/app.Dockerfile" ./lessons/02-model-deployment
 ```
 
-### ✅ Check that it works
+### ✅ Check your Installation - Docker Pull
 
 You should be able to see your image in the Docker Desktop UI:
 
@@ -146,17 +147,21 @@ $ git config --global user.email "you email@foo.bar"
 
 You can find full configuration instruction on the [official Git website](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
 
-### [OPTIONAL] Windows only: `git bash`
+<details>
+  <summary>Windows only: <code>git bash</code></summary>
 
-If you are using Windows, you can use PowerShell as your terminal.
-But Powershell is limited and doesn't support all the commands we will use in this course.
-You will need to install [`git bash`](https://gitforwindows.org/) to have access to all the commands we will use in this course.
+  If you are using Windows, you can use PowerShell as your terminal.
+  But Powershell is limited and doesn't support all the commands we will use in this course.
+  You will need to install [`git bash`](https://gitforwindows.org/) to have access to all the commands we will use in this course.
 
-Please carefully follow [instructions here](https://github.com/git-for-windows/git/releases/tag/v2.42.0.windows.2).
+  Please carefully follow [instructions here](https://github.com/git-for-windows/git/releases/tag/v2.42.0.windows.2).
 
-> Note: you can also use WSL terminal, but it's a bit more complicated to use.
+  > [!Note]
+  > You can also use WSL terminal, but it's a bit more complicated to use.
+</details>
 
-### ✅ Check your Installation
+
+### ✅ Check your Installation - Git
 
 Open a terminal, you should be able to run the following commands:
 
@@ -191,7 +196,7 @@ It includes only conda, Python, the packages they depend on, and a small number 
 To install Miniconda, follow the instructions on the [official Miniconda website](https://docs.conda.io/en/latest/miniconda.html).
 
 
-#### ✅ Check your Installation
+#### ✅ Check your Installation - Conda
 
 Open a terminal, you should be able to run the following commands:
 
@@ -236,7 +241,7 @@ $ conda activate mlops-course
 > You might encounter other errors -> please google them (stackoverflow preferred) first.
 
 
-#### ✅ Check your Installation
+#### ✅ Check your Installation - Conda Environment
 
 Open a terminal, you should be able to run the following commands and have a similar (not necessarily identical) output:
 
@@ -329,7 +334,7 @@ mlflow==1.20.2" >> requirements-temp.txt
 pip install -r requirements.txt
 ```
 
-#### ✅ Check your Installation
+#### ✅ Check your Installation - Requirements
 
 3. Check your requirements can be found in conda env
 ```bash
