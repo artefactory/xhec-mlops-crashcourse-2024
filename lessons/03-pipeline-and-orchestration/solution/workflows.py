@@ -13,9 +13,9 @@ from sklearn.linear_model import LinearRegression
 
 @flow(name="Train model")
 def train_model_workflow(
-    train_filepath: os.PathLike,
-    test_filepath: os.PathLike,
-    artifacts_filepath: Optional[os.PathLike] = None,
+    train_filepath: str,
+    test_filepath: str,
+    artifacts_filepath: Optional[str] = None,
 ) -> dict:
     """Train a model and save it to a file"""
     logger.info("Processing training data...")
@@ -38,10 +38,10 @@ def train_model_workflow(
 
 @flow(name="Batch predict", retries=1, retry_delay_seconds=30)
 def batch_predict_workflow(
-    input_filepath: os.PathLike,
+    input_filepath: str,
     model: Optional[LinearRegression] = None,
     dv: Optional[DictVectorizer] = None,
-    artifacts_filepath: Optional[os.PathLike] = None,
+    artifacts_filepath: Optional[str] = None,
 ) -> np.ndarray:
     """Make predictions on a new dataset"""
     if dv is None:

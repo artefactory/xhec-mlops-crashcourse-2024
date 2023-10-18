@@ -1,4 +1,3 @@
-import os
 from typing import List, Tuple
 
 import numpy as np
@@ -65,7 +64,7 @@ def extract_x_y(
 
 
 @flow(name="Preprocess data")
-def process_data(filepath: os.PathLike, dv=None, with_target: bool = True) -> scipy.sparse.csr_matrix:
+def process_data(filepath: str, dv=None, with_target: bool = True) -> scipy.sparse.csr_matrix:
     """
     Load data from a parquet file
     Compute target (duration column) and apply threshold filters (optional)
