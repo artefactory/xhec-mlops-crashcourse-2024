@@ -4,7 +4,4 @@
 **/local_models/*
 !**/local_models/.gitkeep
 
-locust/runs/*
-!locust/runs/.gitkeep
-
 **/mlruns/
