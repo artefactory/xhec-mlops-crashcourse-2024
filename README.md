@@ -6,6 +6,14 @@ Teach practical aspects of productionizing ML services — from collecting requi
 
 ## [MANDATORY] Pre-requisites & setup
 
+> [!Note]
+> TL; DR
+> - Docker Desktop
+> - Git
+> - Conda / Minconda / another Python environment manager
+> - Python 3.10
+> - Install [./requirements.txt](requirements.txt)
+
 You can find all pre-requisites and setup instructions [here](PREREQUISITES.md).
 
 ## Timeline
