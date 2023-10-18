@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to the MLOps Introduction Course! Over the course of the next 4 sessions, we will present you some of the fundamental aspects of engineering applied to Machine Learning.
+Welcome to the MLOps Introduction Course! Over the course of the next sessions, we will present you some of the fundamental aspects of engineering applied to Machine Learning.
 
 ## Introduction to Coding Best Practices
 

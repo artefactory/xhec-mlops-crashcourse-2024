@@ -18,7 +18,8 @@ Going from notebooks to scripts is, by itself, a simple task. However, it can al
 
 ```
 ├── .github                       <- Where we set up interactions with GitHub such as actions and templates
-├── docs                          <- Project documentation, often generated automatically by tools like `Sphinx`
+├── .gitlab-ci.yml                <- Where we define a CI if we are using GitLab instead of GitHub
+├── docs                          <- Project documentation, often generated automatically by tools like `Sphinx` or `mkdocs`
 ├── config                        <- Config variables stored in yaml, toml or py files
 ├── lib                           <- Main Package. This is where the code lives. Sometimes it is also called `src`
 │   ├── main.py                   <- Entrypoint
@@ -132,23 +133,14 @@ $ source venv/bin/activate  # Activate env
 
 If you need to amend the dependencies of the project, then simply run:
 
-```
+```bash
 (venv) $ pip install mypackage
 # You can have an exhaustive view of your environment:
 (venv) $ pip list | grep pandas
 pandas (1.1.0)
 ```
 
-You should not forget to add this new dependence to `requirements.txt`. Our recommended way is to have a `requirements.in`:
-
-- Just add a line in the file, specifying the version (example: `pandas==1.0.1`)
-- Overwrite `requirements.txt` file by re-generating it:
-
-```
-(venv) $ pip-compile requirements.in
-```
-
-This will automatically parse all your nested dependencies into `requirements.txt` thus ensuring full reproducibility. The only caveats are that it requires an additional package, `pip-tools` and that it takes some time to compile long and complex requirements.
+You should not forget to add this new dependence to `requirements.txt`.
 
 #### Conda
 
@@ -180,6 +172,22 @@ dependencies: # Versions should be taken care of
     - -r requirements.txt
 ```
 
+#### Using `requirements.in`
+
+Another more robust approach to keeping track of your dependencies is to have a `requirements.in` file and use `pip-compile` to compile your requirements. This allows you to keep only the dependencies that are actually imported in your code in the requirements and avoid overly complex requirements files.
+
+- Creat a `requirements.in` with the packages imported in your code, specifying the version (example: `pandas==1.0.1`)
+- Overwrite `requirements.txt` file by re-generating it:
+
+```
+(venv) $ pip-compile requirements.in
+```
+
+This will automatically parse all your nested dependencies into `requirements.txt` thus ensuring full reproducibility. The only caveats are that it:
+- Requires an additional package, [`pip-tools`](https://github.com/jazzband/pip-tools)
+- Takes some time to compile long and complex requirements
+- Does not integrate well with the `environment.yml` approach for `conda`
+
 ### Conda VS Pip
 
 *TL;DR*: use conda.
@@ -192,6 +200,10 @@ These two resources are worth reading:
 ### Demo
 
 - Let's create a new environment to run our hello world project using the `install_env.sh` script.
+
+```bash
+bash install_env.sh
+```
 
 ## Locally check your code
 
@@ -210,11 +222,30 @@ Each linter has its own way of functioning and caveats, so choosing which one mi
 
 ### Demo
 
-- Lint the `best-practices` folder using flake8
+- Go to `best-practices` folder and lint the `best-practices` folder using flake8
+
+```bash
+flake8 .
+```
 
 ### Automatic Formatting
 
 Good formatting is essetial to ensure that your code is readable and comprehensible. However, it is probably the area of coding in which it is the easiest to make a mistake. That is why we generally use tools that format the code automatically, ensuring that we are always PEP compliant. The most used tool for this end is [Black](https://github.com/psf/black). We also often use a tool to organize imports in a logical manner called [isort](https://pycqa.github.io/isort/). The configuration for both tools can be found in the `./pyproject.toml` file.
+
+There are other commonly used tools like [nbstripout](https://github.com/kynan/nbstripout) and [bandit](https://bandit.readthedocs.io/en/latest/) that provide different functionalities, but that have not been used in this project.
+
+### Demo
+
+- Run `isort` to format the imports
+
+```bash
+isort .
+```
+
+- Run `black` to format the code
+```bash
+black .
+```
 
 ### Pre-commit Hooks
 
@@ -228,8 +259,6 @@ pre-commit install -t pre-commit
 
 ### Demo
 
-- Run `isort` to format the imports
-- Run `black` to format the code
 - Create a commit with the changes and see that all check pass
 
 ## Git
@@ -238,6 +267,7 @@ Working with a clean and legible git history is key to rendering your commit his
 
 * If you want to learn more about the branching strategies most commonly used today: [what are the Best Git Branching Strategies](https://www.abtasty.com/blog/git-branching-strategies/) goes through the most commonly used branching strategies
 * More details on the Gitflow framework: [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+* Standardized way of writing commit messages: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 * If you want to master more advanced git functionalities: [Learning Git Branching](https://learngitbranching.js.org/)
 
 ## Continuous Integration
@@ -246,15 +276,25 @@ Working with a clean and legible git history is key to rendering your commit his
 
 Continuous Integration (CI) is a software development practice that involves frequently integrating code changes made by multiple developers into a shared repository. The main goal of CI is to streamline and automate the process of integrating code, running tests, and identifying and fixing bugs early in the development cycle. CI ensures that all changes are tested and incorporated into the main codebase in a consistent and reliable manner. It helps in maintaining code quality, reducing integration issues, and enhancing collaboration among team members. By automating the integration process, CI also enables faster feedback loops, making it easier to catch and resolve issues promptly, leading to improved software stability and quicker delivery of new features. Overall, CI is essential for achieving efficient, robust, and reliable software development.
 
+Common checks performed by a Continuous Integration (CI) system include:
+
+- **Code compilation:** This is the first step in many CI pipelines. The code is compiled to check for any syntax errors.
+- **Unit testing:** These are the tests written by developers to check the functionality of a small piece of code or a "unit". The CI system runs these tests to ensure that the new changes have not broken any existing functionality.
+- **Integration testing:** These tests check the interaction between different units of code. They are run to ensure that the units of code work correctly when integrated.
+- **Static code analysis:** This involves checking the code for potential errors, bugs, or deviations from coding standards without executing the program.
+- **Security testing:** This involves checking the code for potential security vulnerabilities, like secrets leaking
+
+### CICD and Github Actions
+
+Continuous Integration (CI), Continuous Delivery (CD), and GitHub Actions are all practices and tools used in modern software development to automate the process of integrating code changes, testing, and deployment.
+
+CD is a step further than CI and involves the automated delivery of the integrated code to the production environment. It ensures that the software can be released at any time. While CI deals with the build and test stages of the development cycle, CD covers the deployment stages.
+
+[GitHub Actions](https://docs.github.com/en/actions) is a CI/CD tool provided by GitHub. It allows you to automate, customize, and execute your software development workflows right in your GitHub repository. You can write individual tasks, called actions, and combine them to create a custom workflow. Workflows are custom automated processes that you can set up in your repository to build, test, package, release, or deploy any code project on GitHub.
+
 We included an example CI workflow in the [./.github/workflows/ci.yaml](./.github/workflows/ci.yaml) file. It does:
 
 * Copy the current repo into the GitHub Action
 * Set up python
 * Install requirements: ensures there are no conflicts in the requirements
 * Run pre-commit hooks: ensures developer installed pre-commit hooks and thus linted and formatted the code
-
-But a CI can also:
-* Run unit tests
-* Run integration tests
-* Avoid security failures
-* etc.
