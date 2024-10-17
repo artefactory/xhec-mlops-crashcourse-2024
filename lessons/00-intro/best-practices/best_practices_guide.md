@@ -238,7 +238,7 @@ flake8 .
 
 ### Automatic Formatting
 
-Good formatting is essetial to ensure that your code is readable and comprehensible. However, it is probably the area of coding in which it is the easiest to make a mistake. That is why we generally use tools that format the code automatically, ensuring that we are always PEP compliant. The most used tool for this end is [Black](https://github.com/psf/black). We also often use a tool to organize imports in a logical manner called [isort](https://pycqa.github.io/isort/). The configuration for both tools can be found in the `./pyproject.toml` file.
+Good formatting is essential to ensure that your code is readable and comprehensible. However, it is probably the area of coding in which it is the easiest to make a mistake. That is why we generally use tools that format the code automatically, ensuring that we are always PEP compliant. The most used tool for this end is [Black](https://github.com/psf/black). We also often use a tool to organize imports in a logical manner called [isort](https://pycqa.github.io/isort/). The configuration for both tools can be found in the `./pyproject.toml` file.
 
 There are other commonly used tools like [nbstripout](https://github.com/kynan/nbstripout) and [bandit](https://bandit.readthedocs.io/en/latest/) that provide different functionalities, but that have not been used in this project.
 
