@@ -1,13 +1,13 @@
 seaborn==0.12.2
 ipykernel==6.25.2
-scikit-learn==1.5.2
+scikit-learn==1.6.1
 pandas==2.1.1
 loguru==0.7.2
 fastparquet==2024.5.0
 
 # linting
 pre-commit
-black==22.12.0 # be sure to change the version in .pre-commit-config.yaml to match
+black==24.3.0 # be sure to change the version in .pre-commit-config.yaml to match
 black[jupyter]
 flake8==6.0.0 # be sure to change the version in .pre-commit-config.yaml to match
 isort==5.12.0 # be sure
