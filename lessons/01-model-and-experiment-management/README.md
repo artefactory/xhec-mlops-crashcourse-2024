@@ -47,4 +47,4 @@ You'll have to navigate through [MLFlow Documentation](https://mlflow.org/docs/l
 
 ### Homework
 
-Please go through the notebook associated with this lesson. Be sure to add the requirements for this session using the dependencies defined [here](./requirements.txt)
+Please go through the notebook associated with this lesson. Be sure to have your virtual environment synced with all the project dependencies by running `uv sync` in the root of the repository.
