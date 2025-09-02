@@ -31,13 +31,10 @@ Going from notebooks to scripts is, by itself, a simple task. However, it can al
 ├── notebooks                     <- Where the jupyter notebooks are stored
 ├── tests                         <- Where the tests live
 ├── Dockerfile                    <- Project containerization
-├── requirements.in               <- Python packages used by project
-├── requirements.txt              <- Automatically generated requirements (adding all nested dependencies from requirements.in)
-├── environment.yml               <- Conda environment file (specifying virtual env name, python version and python packages)
-├── .gitignore                    <- Files not to be tracked
-├── pyproject.toml                <- Package configuration also used to configure tools such as linters, etc
-├── Makefile                      <- Commands to ease up development cycle
-└── README.md                     <- The top-level README for developers using this project
+├── pyproject.toml                <- Package configuration also used to configure tools such as linters, etc
+├── uv.lock                       <- Automatically generated lockfile for reproducible dependencies
+├── Makefile                      <- Commands to ease up development cycle
+└── README.md                     <- The top-level README for developers using this project
 ```
 
 Every project has its own needs and might not require all of these files or might ask for new ones. Indeed, this very repository does not follow this exact structure to accomodate for the specificities of this lecture. However, increasing the standardization of the placement of these files is crucial to ensure that any developer can quickly read and understand your work in the future.
@@ -46,9 +43,9 @@ Every project has its own needs and might not require all of these files or migh
 
 - Check out the structure of this folder and navigate the files to see what is there and what is missing
 
-## Python virtual environments
+## Python Environment and Dependency Management with uv
 
-The first step to run python code is always to create a separated environment to run it.
+The first step in any reproducible project is establishing a clean, consistent, and fast development environment. Historically, the Python ecosystem has offered a fragmented set of tools for this purpose, each with its own trade-offs. To solve common development issues—such as cross-developer inconsistencies, missing production dependencies, and complex version conflicts—we are standardizing on uv, a next-generation toolchain for Python. This guide will explain what `uv` is, why it represents a fundamental leap forward for our workflows, and how to use it effectively in your day-to-day work.
 
 ### Motivations
 
@@ -62,155 +59,69 @@ In order to avoid these embarrassing situations, the project configuration needs
 
 > That's why any project must come with its virtual environment that is responsible for managing the Python version, as well as all the dependencies.
 
-A virtual environment is always summarized in a requirements.txt (pip-fashion) or a environment.yml (conda-fashion) file, located at the root of the project. It takes the following form:
+### What is uv? The New Standard for Python Tooling
 
-- For `requirements.txt`
+uv represents a new generation of Python package managers, designed to address common pain points in the Python ecosystem such as slow installation times, dependency conflicts, and environment management complexity.
 
-```
-pandas==1.1.0
-```
+### Why uv is the Superior Choice for Our MLOps Workflow
 
-- For `environment.yml`
+`uv` offers several key advantages that make it ideal for our MLOps workflows:
 
-```
-name: envname
-channels:
-  - conda-forge
-dependencies:
-  - pandas=1.1.0
-```
+- **Speed**: `uv` is written in Rust and is significantly faster than traditional Python package managers like `pip` and `conda`. This speed translates directly to faster build times for CI/CD pipelines and quicker local development iterations.
+- **Simplicity**: `uv` streamlines common operations like adding dependencies and syncing environments, reducing the cognitive load on developers.
+- **Integration**: It's designed to work seamlessly with `pyproject.toml`, aligning with modern Python packaging standards.
 
 ### Setting up a virtual environment
 
-We will present 2 options: using `virtualenv` or `conda`
+#### Creating and Managing Environments
 
-#### Virtualenv
+##### Initializing a New Project:
 
-```
-# Install virtualenv package
-$ pip install virtualenv
+The uv init command bootstraps a new project with a modern, standardized structure.
 
-# Create the virtual environment
-$ virtualenv venv --python=python3.x
-
-# Activate it
-$ source venv/Scripts/activate  # Windows
-$ source venv/bin/activate  # Unix
+```bash
+uv init my-ml-project
+cd my-ml-project
 ```
 
-#### Conda
+This command creates a pyproject.toml for configuration, a .python-version file to pin the Python version, a README.md, and a .gitignore.
 
-If you have a Miniconda installed:
-
-```
-# Create env
-$ cd <this repository>
-$ conda env create --file environment.yml
-
-# Activate your environment:
-$ conda activate envname
-
-# Check python:
-(envname) $ which python # Unix
-(envname) $ where python # Windows
-
-# In order to stop using this virtual environment:
-(envname) $ deactivate
-```
-
-Once activated, the command line starts with (`envname`) to let you know which environment you're in. The environment must always be activated while working in the project.
+uv makes environment creation explicit and simple. By default, it creates a .venv directory in the project root.
 
 ### Handle dependencies
 
 In your base environment, there should not be any Python packages. This isolates the dependencies of any project, avoiding future compatibility problems. Therefore, you must always install dependencies from within your virtual environment.
 
-#### Virtualenv
+The `pyproject.toml` file serves as the single source of truth for your project's direct dependencies.
 
-```
-$ source venv/bin/activate  # Activate env
-(venv) $ pip install -r requirements.txt
-```
+#### Adding a Dependency:
 
-If you need to amend the dependencies of the project, then simply run:
+Use uv add. This command automatically resolves the latest compatible version, adds the dependency to pyproject.toml, and updates the uv.lock file in a single, atomic operation.
 
 ```bash
-(venv) $ pip install mypackage
-# You can have an exhaustive view of your environment:
-(venv) $ pip list | grep pandas
-pandas (1.1.0)
+uv add "pandas>=2.0" scikit-learn
 ```
 
-You should not forget to add this new dependence to `requirements.txt`.
+#### Installing from Lockfile (The Main Workflow):
 
-#### Conda
+uv sync is the command that will be used most frequently. It synchronizes the virtual environment to match the exact state defined in uv.lock, adding, removing, or updating packages as needed.
 
-If the name is correctly specified in the `environment.yml` file, then there is no need to run the following command from within the virtual environment:
-
+```bash
+uv sync
 ```
-conda env update --file environment.yml --prune
-```
-
-If you need to amend the dependencies of the project, then simply run:
-
-```
-$ conda activate envname  # Activate env
-(envname) $ conda install -c conda-forge jupyter
-(envname) $ conda list | grep python
-python                    3.8.8           h4e93d89_0_cpython    conda-forge
-```
-
-You should not forget to add this new dependence to `environment.yml`. To get the best of both words, our recommended way is:
-
-- All requirements need to be exported in a `requirements.txt` as explained in the `virtualenv` section above
-- Use `environment.yml` to specify your environement name, your python and pip version and get packages dependencies directly from `requirements.txt`
-
-```
-dependencies: # Versions should be taken care of
-  - python=3.10
-  - pip=23.2.1
-  - pip:
-    - -r requirements.txt
-```
-
-#### Using `requirements.in`
-
-Another more robust approach to keeping track of your dependencies is to have a `requirements.in` file and use `pip-compile` to compile your requirements. This allows you to keep only the dependencies that are actually imported in your code in the requirements and avoid overly complex requirements files.
-
-- Creat a `requirements.in` with the packages imported in your code, specifying the version (example: `pandas==1.0.1`)
-- Overwrite `requirements.txt` file by re-generating it:
-
-```
-(venv) $ pip-compile requirements.in
-```
-
-This will automatically parse all your nested dependencies into `requirements.txt` thus ensuring full reproducibility. The only caveats are that it:
-- Requires an additional package, [`pip-tools`](https://github.com/jazzband/pip-tools)
-- Takes some time to compile long and complex requirements
-- Does not integrate well with the `environment.yml` approach for `conda`
-
-### Conda VS Pip
-
-*TL;DR*: use conda.
-
-These two resources are worth reading:
-
-- Stack Overflow: [What is the difference between Pip and Conda](https://stackoverflow.com/questions/20994716/what-is-the-difference-between-pip-and-conda)
-- Anaconda blog: [Understanding the difference between Conda and Pip](https://www.anaconda.com/blog/understanding-conda-and-pip)
 
 ### Demo
 
-- Let's create a new environment to run our hello world project using the `install_env.sh` script. Make sure you are at `best-practices` and run:
+- Let's create a new environment to run our hello world project using `uv` script. Make sure you are at `best-practices` and run:
 
 ```bash
-pip install pip-tools
+uv sync
 ```
 
-```bash
-bash bin/install_env.sh
-```
+then
 
 ```bash
-conda activate foo-env
+source .venv/bin/activate
 ```
 
 ## Locally check your code
@@ -219,7 +130,7 @@ You now have a functioning local environment where you can develop python code. 
 
 ### Linting
 
-*Linters* perform a *static* evaluation of the code to look for bugs and errors. They are useful as they help in identifying potential issues in the code before it is run. As they perform static evaluation, they cannot catch any RunTime errors. However, a linter can check for syntax errors, type mismatches, and code smells. The most used linters in Python include:
+_Linters_ perform a _static_ evaluation of the code to look for bugs and errors. They are useful as they help in identifying potential issues in the code before it is run. As they perform static evaluation, they cannot catch any RunTime errors. However, a linter can check for syntax errors, type mismatches, and code smells. The most used linters in Python include:
 
 - [Pylint](https://pypi.org/project/pylint/)
 - [Pyflakes](https://pypi.org/project/pyflakes/)
@@ -251,6 +162,7 @@ isort .
 ```
 
 - Run `black` to format the code
+
 ```bash
 black .
 ```
@@ -273,10 +185,10 @@ pre-commit install -t pre-commit
 
 Working with a clean and legible git history is key to rendering your commit history usable. The whole point of using `git` is to keep track of the changes in code and collaborate better. Achieving that requires establishing rules that go beyond the simple practices we keep when working alone.
 
-* If you want to learn more about the branching strategies most commonly used today: [what are the Best Git Branching Strategies](https://www.abtasty.com/blog/git-branching-strategies/) goes through the most commonly used branching strategies
-* More details on the Gitflow framework: [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-* Standardized way of writing commit messages: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
-* If you want to master more advanced git functionalities: [Learning Git Branching](https://learngitbranching.js.org/)
+- If you want to learn more about the branching strategies most commonly used today: [what are the Best Git Branching Strategies](https://www.abtasty.com/blog/git-branching-strategies/) goes through the most commonly used branching strategies
+- More details on the Gitflow framework: [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+- Standardized way of writing commit messages: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+- If you want to master more advanced git functionalities: [Learning Git Branching](https://learngitbranching.js.org/)
 
 ## Continuous Integration
 
@@ -302,7 +214,7 @@ CD is a step further than CI and involves the automated delivery of the integrat
 
 We included an example CI workflow in the [./.github/workflows/ci.yaml](./.github/workflows/ci.yaml) file. It does:
 
-* Copy the current repo into the GitHub Action
-* Set up python
-* Install requirements: ensures there are no conflicts in the requirements
-* Run pre-commit hooks: ensures developer installed pre-commit hooks and thus linted and formatted the code
+- Copy the current repo into the GitHub Action
+- Set up python
+- Install requirements: ensures there are no conflicts in the requirements
+- Run pre-commit hooks: ensures developer installed pre-commit hooks and thus linted and formatted the code

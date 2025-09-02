@@ -1,9 +1,5 @@
 # Machine Learning Pipelines and Orchestration with Prefect
 
-Start by installing the dependencies:
-
-```bash
-pip install -r requirements.txt
-```
+Be sure to have your virtual environment synced with all the project dependencies by running `uv sync` in the root of the repository.
 
 Please follow the instructions in the [notebook](orchestration.ipynb).
