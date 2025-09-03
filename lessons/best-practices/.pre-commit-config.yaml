@@ -1,26 +1,37 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
-  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
-    rev: v3.2.0
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-toml
       - id: check-yaml
+        args: ["--unsafe"]
+      - id: check-json
       - id: check-added-large-files
-  - repo: https://github.com/psf/black
-    rev: 22.12.0 # make sure it matches with versions on requirments
+  - repo: local
     hooks:
-      - id: black
-        language_version: python3.9
-      - id: black-jupyter
-        language_version: python3.9
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0 # make sure it matches with versions on requirments
-    hooks:
-    - id: isort
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0 # make sure it matches with versions on requirments
-    hooks:
-    - id: flake8
+      - id: ruff-format
+        name: Formatting (ruff)
+        entry: uv run ruff format
+        types: [python]
+        language: system
+      - id: ruff-fix
+        name: Linting (ruff)
+        entry: uv run ruff check
+        types: [python]
+        language: system
+      - id: ruff-sort
+        name: Sorting (ruff)
+        entry: uv run ruff check --select I --fix
+        types: [python]
+        language: system
+      - id: nbstripout
+        name: Strip Jupyter notebook output (nbstripout)
+        entry: nbstripout
+        types: [file]
+        files: (.ipynb)$
+        language: system
+exclude: ^(.svn|CVS|.bzr|.hg|.git|__pycache__|.tox|.ipynb_checkpoints|assets|tests/assets/|venv/|.venv/)

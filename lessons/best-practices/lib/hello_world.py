@@ -1,12 +1,10 @@
-from functools import lru_cache
-
 import pandas as pd
 from config import APP_NAME, DATA_PATH
 
 
 def Hello_world():
     """Print a hello world message."""
-    useless_var = "This is a useless variable"
+    useless_var = "This is a useless variable"  # noqa
     print(f"Hello, World! This is {APP_NAME}!")
 
 
