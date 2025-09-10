@@ -1,5 +1,5 @@
 [project]
-name = "xhec-mlops-crashcourse-2025"
+name = "best-practice"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -10,11 +10,9 @@ dependencies = [
   "ipykernel==6.25.2",
   "pandas==2.1.1",
   "loguru==0.7.2",
-  "mlflow==2.7.1",
   "pydantic>=1,<2",
   "uvicorn==0.23.2",
   "fastapi==0.103.2",
-  "prefect==2.13.7",
   "griffe<1.0.0",
 ]
 

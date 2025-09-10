@@ -4,7 +4,7 @@ FROM python:3.11.6-slim
 # Don't forget to :
 # - Install the app dependencies
 #   - Install pip on the container
-#   - Copy your dependencies (written in a txt file, look at pip-compile package)
+#   - Copy your dependencies (written in a txt file, run `uv pip freeze > requirements.txt`)
 #   - Run the pip command
 # - Expose the correct port
 # - Copy your files in the container
