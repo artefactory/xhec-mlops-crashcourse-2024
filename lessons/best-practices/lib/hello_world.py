@@ -1,5 +1,5 @@
 import pandas as pd
-from config import APP_NAME, DATA_PATH
+from config import DATA_PATH, APP_NAME
 
 
 def Hello_world():
@@ -9,8 +9,7 @@ def Hello_world():
 
 
 def sum_two_numbers(num1: int, num2: int):
-    """Sum two numbers.
-    """
+    """Sum two numbers."""
     return num1 + num2
 
 

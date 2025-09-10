@@ -158,14 +158,20 @@ There are other commonly used tools like [nbstripout](https://github.com/kynan/n
 - Run `ruff` to format the imports
 
 ```bash
-uv run ruff check --select I --fix
+uv run ruff check --select I
 ```
+You can add the argument `--fix` to resolve the issue
 
 - Run `ruff` to format the code
 
 ```bash
 uv run ruff format
 ```
+
+### Additional Notes
+
+You can add or remove some rules in each of the tool to adjust your coding style to the use-case. Finding the right balance between code quality and the delivery of your project is a difficult task that requires good communications between team members. In addition to automatic checks, each team might decide some conventions to ease maintaining a repo (Functions must start with a verb, Use Meaningful variable Names...)
+
 
 ### Pre-commit Hooks
 
@@ -174,7 +180,7 @@ Git provides a useful tool to help putting these technique into practice. Pre-co
 Before using the pre-commits, you must install them, by running in your terminal:
 
 ```bash
-pre-commit install -t pre-commit
+uv run pre-commit install -t pre-commit
 ```
 
 ### Demo
