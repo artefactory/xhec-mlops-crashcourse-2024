@@ -1,4 +1,5 @@
-def main():
+def main() -> None:
+    """Main functions."""
     print("Hello from xhec-mlops-crashcourse-2025!")
 
 

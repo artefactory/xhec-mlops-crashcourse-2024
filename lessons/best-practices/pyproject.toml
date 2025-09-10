@@ -28,3 +28,16 @@ dev = [
 
 [tool.ruff]
 line-length = 130
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["D", "ANN","E","W","F","N","Q","ARG","PTH",]
+ignore = ["D417", "D100", "PD901", "N806", "N815", "N803", "ANN401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+order-by-type = true

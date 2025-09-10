@@ -4,13 +4,12 @@ from config import APP_NAME, DATA_PATH
 
 def Hello_world():
     """Print a hello world message."""
-    useless_var = "This is a useless variable"  # noqa
+    useless_var = "This is a useless variable"
     print(f"Hello, World! This is {APP_NAME}!")
 
 
-def sum_two_numbers(num1, num2):
-    """
-    Sum two numbers.
+def sum_two_numbers(num1: int, num2: int):
+    """Sum two numbers.
     """
     return num1 + num2
 
