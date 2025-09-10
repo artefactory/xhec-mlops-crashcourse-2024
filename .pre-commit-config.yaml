@@ -28,7 +28,7 @@ repos:
         language: system
       - id: nbstripout
         name: Strip Jupyter notebook output (nbstripout)
-        entry: nbstripout
+        entry: uv run nbstripout
         types: [file]
         files: (.ipynb)$
         language: system

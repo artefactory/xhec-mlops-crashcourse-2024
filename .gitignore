@@ -88,3 +88,6 @@ venv/*
 
 # Mypy cache
 .mypy_cache/
+
+#MLFlow
+mlruns/
